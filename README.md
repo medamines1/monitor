@@ -1,4 +1,5 @@
 # django instances monitor
+[![PYTHON Version]][2.7]
 Django monitor create a control panel that detect automaticaly all the 
 new instance and control wether they are still active along with some 
 static like time to response 
