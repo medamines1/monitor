@@ -8,9 +8,17 @@ instance is down and other one to send msg to the dev using twilio...
 ``` 
   GIT: sudo pip install git+https://github.com/medamines1/monitor/
 ```
-Then add to you're application  settings file 
-```
-    from monitor.myapp import client
+create link to monitor project for fast access :
+
+  cd your_project
+
+  ln -s path_to/monitor . 
+  
+
+Then append to you're application settings.py file  these lines :
+
+```  
+  from monitor.myapp import client
 
     R_DEBUG= True
      
@@ -18,8 +26,21 @@ Then add to you're application  settings file
       client.on_start_up()
     
 ```
+if you're just testing you're app and don't won't to run monitor just change R_DEBUG to False
+
+Migrate :
+  python location/monitor.py migrate
+  
 Create a normal superuser 'nothing fancy'
-  monitor.py createsuperuser
+
+  python location/monitor.py createsuperuser
+ 
+ add x to rcelery and run 
+    chmod u+x rcelery
+    chmod u+x run
+Run celery  ==> ./rcelery
+Run monitor ==> ./run
+
 You can alse change the some param : 
 ```
 -Redis
@@ -37,5 +58,4 @@ ip of the monitor using redis server
 
 
 
-ps : 
-this app is still under developement
+# ps :  this app is still under developement
