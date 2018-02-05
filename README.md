@@ -38,18 +38,19 @@ Create a normal superuser 'nothing fancy'
   ```python location/monitor.py createsuperuser```
  
  add x to rcelery and run 
-   ``` chmod u+x rcelery
-    chmod u+x run```
-Run celery  ==> ```./rcelery```
-Run monitor ==> ```./run```
+   ```
+      chmod u+x rcelery
+      chmod u+x run
+      ```
+Run celery  ==> `./rcelery`
+Run monitor ==> ` ./run `
 
 You can alse change the some param : 
-```
--Redis
-  def on_start_up(host='localhost',port=6379,db=0,protcol='http',*arg,**kwargs):
--Celery 
+- Redis-Server:
+  def on_start_up(host='localhost',port=6379,db=0,protcol='http',*arg,**kwargs)
+- Celery: 
   uses the default config...
-```
+
 # Requirement
  In order for each instance to declare it's exisitance it must get the 
 ip of the monitor using redis server
