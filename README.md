@@ -10,7 +10,8 @@ instance is down and other one to send msg to the dev using twilio...
 ```
 create link to monitor project for fast access :
 
-  ```cd your_project
+  ```
+  cd your_project
 
   ln -s path_to/monitor . 
   ```
