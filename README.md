@@ -10,9 +10,10 @@ instance is down and other one to send msg to the dev using twilio...
 ```
 create link to monitor project for fast access :
 
-  cd your_project
+  ```cd your_project
 
   ln -s path_to/monitor . 
+  ```
   
 
 Then append to you're application settings.py file  these lines :
@@ -29,17 +30,17 @@ Then append to you're application settings.py file  these lines :
 if you're just testing you're app and don't won't to run monitor just change R_DEBUG to False
 
 Migrate :
-  python location/monitor.py migrate
+  ```python location/monitor.py migrate```
   
 Create a normal superuser 'nothing fancy'
 
-  python location/monitor.py createsuperuser
+  ```python location/monitor.py createsuperuser```
  
  add x to rcelery and run 
-    chmod u+x rcelery
-    chmod u+x run
-Run celery  ==> ./rcelery
-Run monitor ==> ./run
+   ``` chmod u+x rcelery
+    chmod u+x run```
+Run celery  ==> ```./rcelery```
+Run monitor ==> ```./run```
 
 You can alse change the some param : 
 ```
