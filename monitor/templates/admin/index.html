@@ -1,0 +1,147 @@
+{% load staticfiles %}
+<head>
+<link rel="stylesheet" href="{% static "admin/css/font-awesome.min.css "%}"">
+<link rel="stylesheet" type="text/css" href="{% static "admin/css/index.css"%}">
+<link rel="stylesheet" type="text/css" href="{% static "admin/css/bootstrap.min.css"%}">
+
+</head>
+<body>
+<div id="topnav" class="topnav" >
+  <a id="logo" style="background:#e9e9e9;border: solid #1ABC9C 2px;"><img src="{% static "admin/img/logo.png"%}" height="80" width="80"></a>
+  <script type="text/javascript" src="{% static "admin/js/jquery.js"%}"></script>
+  <script type="text/javascript" src="{% static "admin/js/Chart.js"%}"></script>
+  <div id="toptop" class="toptop">
+    <span>Monitor</span>
+
+  <a class="active" href="#home">Home</a>
+  <div class="search-container">
+
+    <form action="/">
+      <input type="text" placeholder="Search.." name="search">
+      <button style="color: #1ABC9C;" onclick="light();" type="button" >ligh off</button>
+      <button type="submit"><i class="fa fa-search"></i></button>
+
+    </form>
+   </div>
+
+  </div>
+</div>
+
+<p>
+<div id="jumbotron" class="jumbotron">
+  <h3>Dahsboard</h3>
+
+
+</div>
+
+<script type="text/javascript">
+var lighe_state='on';
+function light(){
+  if (lighe_state=="on"){//background:#e9e9e9;border: solid #1ABC9C 2px;
+    $('#jumbotron').attr('style','background-color:black !important;border:solid 2px #1ABC9C;');
+    $('#toptop').attr('style','background-color:black !important;border:solid 2px #1ABC9C;');
+    $('#logo').attr('style','background-color:black !important;border:solid 2px #1ABC9C;');
+    $('#topnav').attr('style','background-color:black !important;');
+    $('body').attr('style','background-color:black !important;');
+    lighe_state='off';
+  }
+  else{
+    $('#jumbotron').attr('style','');
+    $('#toptop').attr('style','');
+    $('#logo').attr('style','background:#e9e9e9;border: solid #1ABC9C 2px;');
+    $('#topnav').attr('style','');
+    $('body').attr('style','');
+    lighe_state='on';
+
+  }
+}
+
+
+function random_colors(){
+  return 'rgba('+parseInt(Math.random() * (255))+','+parseInt(Math.random() * (255))+','+parseInt(Math.random() * (255))+')';
+}
+
+
+function update_screen(){
+$.get("/get",function(data){
+var j=0;
+str = "";
+for(i=0;i<Object.keys(data).length;i++){
+host=Object.keys(data)[i];
+datai=data[host];
+class_ ="widget" ; 
+if (datai[0]=='close')
+  class_ ="widget style='background: #CF000F !important;'" ; 
+template = 
+    "<div class='col-sm-4'>"+
+     " <div class="+class_+">"+
+      " <span>"+host+"</span>"+
+       "   <div class='mychart'>"+
+       " <canvas id=myChart"+i+" ></canvas>"+
+      "</div>"+
+    "</div></div>";
+if (j==0)
+  template = "<div class='row'>"+template;
+if (j==2){
+  template = template+"</div>";
+  j=-1;
+}
+j++;
+
+  str+=template;
+ //**
+    }
+
+var ctxdata =$('#jumbotron');
+$('#jumbotron').empty();
+console.log('udating');
+ctxdata.append(str);
+
+if (j==1)
+  $("#jumbotron").append('</div>');
+ 
+
+
+for(i=0;i<Object.keys(data).length;i++){
+host=Object.keys(data)[i];
+datai=data[host];
+
+
+  var myChart = new Chart($('#myChart'+i)[0].getContext("2d"), {
+    type: 'line',
+    data: {
+        labels: Array.from({length:datai[1].length},(v,k)=>String(k+1)),
+        datasets: [{
+            label: 'traffic',
+            data: datai[1],
+            fontColor: "#fff",
+            pointBackgroundColor: Array.from({length:datai[1].length},(v,k)=>random_colors()),
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+  }
+
+ });  
+
+} 
+$(document).ready(function (){
+update_screen();
+setInterval(function(){update_screen();},10000);
+  }); 
+</script>
+
+
+<footer>
+  <span># Made By Mohamed Amine Dahmen</span>
+</footer>
+</body>

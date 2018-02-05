@@ -1,0 +1,170 @@
+{% load staticfiles %}
+<head>
+<link rel="stylesheet" href="{% static "admin/css/font-awesome.min.css"%}>
+<link rel="stylesheet" type="text/css" href="{% static "admin/css/index.css"%}">
+<link rel="stylesheet" type="text/css" href="{% static "admin/css/bootstrap.min.css"%}">
+
+</head>
+<body>
+<div id="topnav" class="topnav" >
+  <a id="logo" style="background:#e9e9e9;border: solid #1ABC9C 2px;"><img src="{% static "admin/img/logo.png"%}" height="80" width="80"></a>
+  <script type="text/javascript" src="{% static "admin/js/jquery.js"%}"></script>
+  <script type="text/javascript" src="{% static "admin/js/Chart.js"%}"></script>
+  <div id="toptop" class="toptop">
+    <span>Monitor</span>
+
+  <a class="active" href="#home">Home</a>
+  <div class="search-container">
+
+    <form action="/">
+      <input type="text" placeholder="Search.." name="search">
+      <button onclick="light();" type="button" >ligh off</button>
+      <button type="submit"><i class="fa fa-search"></i></button>
+
+    </form>
+   </div>
+
+  </div>
+</div>
+
+<p>
+<div id="jumbotron" class="jumbotron">
+  <h3>Dahsboard</h3>
+
+<div class="row">
+  <div class="col-sm-4">
+    <div class="widget">
+      <span>127.0.0.2</span>
+      <div class="mychart">
+        <canvas id="myChart" ></canvas>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col-sm-4">
+    <div class="widget">
+      <span>127.0.0.2</span>
+      <div class="mychart2">
+        <canvas id="myChart" ></canvas>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col-sm-4">
+    <div class="widget">
+      <span>127.0.0.2</span>
+      <div class="mychart3">
+        <canvas id="myChart" ></canvas>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="row">
+  <div class="col-sm-4">
+    <div class="widget">
+      <span>127.0.0.2</span>
+      <div class="mychart4">
+        <canvas id="myChart" ></canvas>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col-sm-4">
+    <div class="widget">
+      <span>127.0.0.2</span>
+      <div class="mychart5">
+        <canvas id="myChart" ></canvas>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col-sm-4">
+    <div class="widget">
+      <span>127.0.0.2</span>
+      <div class="mychart6">
+        <canvas id="myChart" ></canvas>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<script type="text/javascript">
+var lighe_state='on';
+function light(){
+  if (lighe_state=="on"){//background:#e9e9e9;border: solid #1ABC9C 2px;
+    $('#jumbotron').attr('style','background-color:black !important;border:solid 2px #1ABC9C;');
+    $('#toptop').attr('style','background-color:black !important;border:solid 2px #1ABC9C;');
+    $('#logo').attr('style','background-color:black !important;border:solid 2px #1ABC9C;');
+    $('#topnav').attr('style','background-color:black !important;');
+    $('body').attr('style','background-color:black !important;');
+    lighe_state='off';
+  }
+  else{
+    $('#jumbotron').attr('style','');
+    $('#toptop').attr('style','');
+    $('#logo').attr('style','background:#e9e9e9;border: solid #1ABC9C 2px;');
+    $('#topnav').attr('style','');
+    $('body').attr('style','');
+    lighe_state='off';
+
+  }
+}
+
+
+
+  var ctxdata =$('[id="myChart"]');
+ ctxdata.each(function (ctx){ 
+  console.log(ctxdata[ctx]);
+  var myChart = new Chart(ctxdata[ctx], {
+    type: 'line',
+    data: {
+        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+        datasets: [{
+            label: '* traffic',
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+});  
+ 
+</script>
+
+
+<footer>
+  <span># Made By Mohamed Amine Dahmen</span>
+</footer>
+</body>
